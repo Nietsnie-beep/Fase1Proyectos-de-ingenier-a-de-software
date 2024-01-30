@@ -1,0 +1,23 @@
+@startuml
+start
+
+:require fs;
+:require path;
+:create htmlFiles array;
+:create logFile;
+:declare logContent;
+
+partition "forEach loop over htmlFiles" {
+    foreach (file in htmlFiles) is (For each file)
+        :start console timer for file;
+        :read file;
+        :end console timer for file;
+        :append file read time to logContent;
+    end foreach
+}
+
+:record total time in logContent;
+:write logContent to logFile;
+
+stop
+@enduml
