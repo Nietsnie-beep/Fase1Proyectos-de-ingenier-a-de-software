@@ -1,0 +1,39 @@
+@startuml
+!theme plain
+ 
+start
+:Visitante decide recargar pulsera NFC;
+if (¿Recarga desde Aplicación Móvil o Cajero Físico?) then (Aplicación Móvil)
+    :Recarga a través de la Aplicación Móvil;
+    else (Cajero Físico)
+    :Recarga en Cajero Físico;
+endif
+:El sistema convierte moneda extranjera a nacional si es necesario;
+:Créditos añadidos a la pulsera;
+ 
+' Cambio principal aquí: División de flujos para comprar y acceder a zonas restringidas
+fork
+    :Visitante realiza compras;
+    if (¿Compra comida, souvenirs, snacks o realiza operaciones en restaurantes?) then (Sí)
+        :Selecciona producto o servicio;
+        :Verifica crédito y edad con pulsera NFC;
+        if (¿Suficiente crédito y edad adecuada?) then (Sí)
+            :Procede con la compra;
+            :Reporta transacción al sistema externo de manejo de dinero;
+            else (No)
+            :Denega la compra;
+        endif
+    endif
+
+ 
+:Visitante utiliza servicios del parque;
+if (¿Necesita reservar atracciones o alertar sobre alergias en restaurantes?) then (Sí)
+    :Llena formulario de reservación;
+    :Sistema de reservaciones procesa la información;
+    :Alertas sobre alergias en restaurantes activadas si es necesario;
+else (No)
+    :Disfruta de las atracciones sin necesidad de reservación;
+endif
+ 
+stop
+@enduml
