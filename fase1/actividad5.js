@@ -31,15 +31,25 @@ files.forEach(file => {
 
 // Ordena las palabras alfabéticamente y escribe el archivo
 const sortedWords = Object.entries(allWords).sort((a, b) => a[0].localeCompare(b[0]));
-fs.writeFileSync(outputFile, sortedWords.map(([word, count]) => `${word}: ${count}`).join('\n'));
+const alphabeticallySortedContent = sortedWords.map(([word, count]) => `${word}: ${count}`).join('\n');
+fs.writeFileSync(outputFile, alphabeticallySortedContent);
+
+// Imprime el contenido ordenado alfabéticamente en consola
+console.log("Palabras ordenadas alfabéticamente y sus frecuencias:");
+console.log(alphabeticallySortedContent);
 
 // Ordena las palabras por frecuencia y escribe el archivo
 const sortedByFrequency = Object.entries(allWords).sort((a, b) => b[1] - a[1]);
-fs.writeFileSync(outputFileByFrequency, sortedByFrequency.map(([word, count]) => `${word}: ${count}`).join('\n'));
+const frequencySortedContent = sortedByFrequency.map(([word, count]) => `${word}: ${count}`).join('\n');
+fs.writeFileSync(outputFileByFrequency, frequencySortedContent);
+
+// Imprime el contenido ordenado por frecuencia en consola
+console.log("Palabras ordenadas por frecuencia y sus frecuencias:");
+console.log(frequencySortedContent);
 
 const endTotalTime = performance.now();
 
-// Añade el tiempo total al contenido del log
+// Añade el tiempo total al contenido del log y lo escribe en el archivo
 logContent = `Total Time to process: ${((endTotalTime - startTotalTime) / 1000).toFixed(2)}s`;
 fs.writeFileSync(logFile, logContent);
 
